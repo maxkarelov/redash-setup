@@ -1,6 +1,6 @@
 version: "2"
 x-redash-service: &redash-service
-  image: redash/redash:8.0.0.b32245
+  image: maxbr/redash-arm:latest
   depends_on:
     - postgres
     - redis
@@ -42,7 +42,7 @@ services:
       - /opt/redash/postgres-data:/var/lib/postgresql/data
     restart: always
   nginx:
-    image: redash/nginx:latest
+    image: maxbr/redash-nginx:latest
     ports:
       - "80:80"
     depends_on:

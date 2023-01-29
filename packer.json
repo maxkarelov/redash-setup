@@ -1,14 +1,14 @@
 {
   "variables": {
-    "image_version": ""
+    "image_version": "2"
   },
   "builders": [
     {
       "name": "redash-us-east-1",
       "type": "amazon-ebs",
       "region": "us-east-1",
-      "source_ami": "ami-0ac019f4fcb7cb7e6",
-      "instance_type": "t2.micro",
+      "source_ami": "ami-0a5ec5786500eaf19",
+      "instance_type": "t4g.large",
       "ssh_username": "ubuntu",
       "ami_name": "redash-{{user `image_version`}}-us-east-1"
     },
@@ -40,11 +40,11 @@
     },
     {
       "type": "shell",
-      "inline": "sudo rm /root/.ssh/authorized_keys || true"
+      "inline": "sudo rm -f /root/.ssh/authorized_keys || true"
     },
     {
       "type": "shell",
-      "inline": "sudo rm /home/ubuntu/.ssh/authorized_keys || true"
+      "inline": "sudo rm -f /home/ubuntu/.ssh/authorized_keys || true"
     },
     {
       "type": "file",
@@ -70,11 +70,6 @@
     {
       "type": "shell",
       "script": "data/cleanup.sh",
-      "execute_command": "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
-    },
-    {
-      "type": "shell",
-      "script": "data/do_img_checks.sh",
       "execute_command": "{{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     }
   ],
